@@ -1,2 +1,2 @@
-// tetya shluha sosala zalupu a eshe ona shluha krivorukaya (Rita)
+// Тетя шлюха блять йобобаная (Рита)
 // dyadya vlad sosal 12 hours

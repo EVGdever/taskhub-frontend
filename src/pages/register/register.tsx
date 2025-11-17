@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./register.module.css"
 
 export const RegisterPage = () => {
-    console.log(styles)
     return (
         <div className={styles.main}>
                 <div className={styles.header}>
@@ -12,21 +11,21 @@ export const RegisterPage = () => {
                 </div>
                     <div className={styles.container}>
                         <div className={styles.block}>
-                            <div className={styles.title1}>
-                                <div className={styles.text1}>Регистрация</div>
-                                <div className={styles.text2}>Заполните форму для регистрации</div>
+                            <div className={styles.titleBlock}>
+                                <div className={styles.title}>Регистрация</div>
+                                <div className={styles.subTitle}>Заполните форму для регистрации</div>
                             </div>
-                            <div className={styles.title2}>
-                                <div className={styles.text3}>Email</div>
-                                <input className={styles.form} placeholder="user@gmail.com" />
+                            <div className={styles.inputBlock}>
+                                <div className={styles.label}>Email</div>
+                                <input className={styles.input} placeholder="user@gmail.com" />
                             </div>
-                            <div className={styles.title2}>
-                                <div className={styles.text3}>Пароль</div>
-                                <input type="password" className={styles.form} placeholder="••••••" />
+                            <div className={styles.inputBlock}>
+                                <div className={styles.label}>Пароль</div>
+                                <input type="password" className={styles.input} placeholder="••••••" />
                             </div>
-                            <div className={styles.title2}>
-                                <div className={styles.text3}>Повторить пароль</div>
-                                <input type="password" className={styles.form} placeholder="••••••" />
+                            <div className={styles.inputBlock}>
+                                <div className={styles.label}>Повторить пароль</div>
+                                <input type="password" className={styles.input} placeholder="••••••" />
                             </div>
                             <button className={styles.button}>Зарегестрироваться</button>
                         </div>

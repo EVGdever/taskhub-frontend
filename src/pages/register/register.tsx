@@ -1,7 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./register.module.css"
+import cn from "classnames"
+import axios from "axios"
 
 export const RegisterPage = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+    const noHavePasswordErrors = password === repeatPassword && password.length >= 6 && repeatPassword.length >= 6;
+    const handleRegister = () => {
+        axios.post(
+            "http://localhost:5000/api/auth/register",
+            {
+                name: name,
+                email: email,
+                password: password
+            }
+        )
+            .then((response) => {
+                console.log(response)
+            })
+    }
+
     return (
         <div className={styles.main}>
                 <div className={styles.header}>
@@ -16,20 +37,63 @@ export const RegisterPage = () => {
                                 <div className={styles.subTitle}>Заполните форму для регистрации</div>
                             </div>
                             <div className={styles.inputBlock}>
+                                <div className={styles.label}>Имя</div>
+                                <input
+                                    className={styles.input}
+                                    placeholder="Введите имя"
+                                    value={name}
+                                    onChange={(event) => {
+                                        setName(event.target.value)
+                                    }}
+                                />
+                            </div>
+                            <div className={styles.inputBlock}>
                                 <div className={styles.label}>Email</div>
-                                <input className={styles.input} placeholder="user@gmail.com" />
+                                <input
+                                    className={styles.input}
+                                    placeholder="user@gmail.com"
+                                    value={email}
+                                    onChange={(event) => {
+                                        setEmail(event.target.value)
+                                    }}
+                                />
                             </div>
                             <div className={styles.inputBlock}>
                                 <div className={styles.label}>Пароль</div>
-                                <input type="password" className={styles.input} placeholder="••••••" />
+                                <input
+                                    type="password"
+                                    className={cn([styles.input, !noHavePasswordErrors && styles.inputError])}
+                                    placeholder="••••••"
+                                    value={password}
+                                    onChange={(event) => {
+                                        setPassword(event.target.value)
+                                    }}
+                                />
                             </div>
                             <div className={styles.inputBlock}>
                                 <div className={styles.label}>Повторить пароль</div>
-                                <input type="password" className={styles.input} placeholder="••••••" />
+                                <input
+                                    type="password"
+                                    className={cn([styles.input, !noHavePasswordErrors && styles.inputError])}
+                                    placeholder="••••••"
+                                    value={repeatPassword}
+                                    onChange={(event) => {
+                                        setRepeatPassword(event.target.value)
+                                    }}
+                                />
+                                {!noHavePasswordErrors && <div className={styles.error}>Пароли не совпадают</div>}
                             </div>
-                            <button className={styles.button}>Зарегестрироваться</button>
+                            <button
+                                className={cn( [styles.button, !noHavePasswordErrors && styles.buttonDisabled])}
+                                disabled={!noHavePasswordErrors}
+                                onClick={handleRegister}
+                            >
+                                Зарегестрироваться
+                            </button>
                         </div>
                     </div>
         </div>
     )
 }
+
+

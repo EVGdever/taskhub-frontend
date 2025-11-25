@@ -8,7 +8,7 @@ export const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
-    const notMatchError = password === repeatPassword && password.length >= 6 && repeatPassword.length >= 6;
+    const noHavePasswordErrors = password === repeatPassword && password.length >= 6 && repeatPassword.length >= 6;
     const handleRegister = () => {
         axios.post(
             "http://localhost:5000/api/auth/register",
@@ -18,9 +18,9 @@ export const RegisterPage = () => {
                 password: password
             }
         )
-        .then((response) => {
-            console.log(response)
-        })
+            .then((response) => {
+                console.log(response)
+            })
     }
 
     return (
@@ -62,7 +62,7 @@ export const RegisterPage = () => {
                                 <div className={styles.label}>Пароль</div>
                                 <input
                                     type="password"
-                                    className={cn([styles.input, !notMatchError && styles.inputError])}
+                                    className={cn([styles.input, !noHavePasswordErrors && styles.inputError])}
                                     placeholder="••••••"
                                     value={password}
                                     onChange={(event) => {
@@ -74,18 +74,18 @@ export const RegisterPage = () => {
                                 <div className={styles.label}>Повторить пароль</div>
                                 <input
                                     type="password"
-                                    className={cn([styles.input, !notMatchError && styles.inputError])}
+                                    className={cn([styles.input, !noHavePasswordErrors && styles.inputError])}
                                     placeholder="••••••"
                                     value={repeatPassword}
                                     onChange={(event) => {
                                         setRepeatPassword(event.target.value)
                                     }}
                                 />
-                                {!notMatchError && <div className={styles.error}>Пароли не совпадают</div>}
+                                {!noHavePasswordErrors && <div className={styles.error}>Пароли не совпадают</div>}
                             </div>
                             <button
-                                className={cn( [styles.button, !notMatchError && styles.buttonDisabled])}
-                                disabled={!notMatchError}
+                                className={cn( [styles.button, !noHavePasswordErrors && styles.buttonDisabled])}
+                                disabled={!noHavePasswordErrors}
                                 onClick={handleRegister}
                             >
                                 Зарегестрироваться
